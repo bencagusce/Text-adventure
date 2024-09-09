@@ -3,6 +3,10 @@
 
 # Items & Inventory
 - [ ] 4 different items
+    - map 
+    - key
+    - mind reading amulet (can challange goose to battleship)
+    - goose
 - [ ] The player can find items and choose to pick them up
 - [ ] One item that gives access to some environment otherwise not accessible
 - [ ] One item that influences the players ability to overcome a later challenge
@@ -10,6 +14,12 @@
 
 # Environments (or Rooms)
 - [ ] 4 different environments
+    - basement (dark room) Find goose and your left sock (required for winning the game)
+    - Hallway (start/end)
+    - 2nd floor  (sign: <-library,^ Kitchen, chamber ->)
+    - go rigth - Gorb the mighty (rock/paper/scissors fight) win map
+    - go forward - Kitchen Kagrl the hungry (rock/paper/scissors fight) win basement key
+    - go left - Library (solve riddle) win mind reading amulet
 - [ ] The player has different events happen, and sometimes choices of what to do in each environment
 - [ ] One choice between 2 or more paths (or doors), that lead to different environments
 - [ ] One choice between 2 or more items to pick up
@@ -29,3 +39,20 @@
 - [ ] More than 4 different environments
 - [ ] Add a second challenge, reusing functionality from the first one (without copying code)
 - [ ] Add multiple opponents to a challenge that all needs to be defeated one after the other, make each opponent different
+
+
+cook: 
+Oh challanger take a seat
+It's time for a change of beat
+For you have stumble in my kitchen
+Where i shall turn you into a chicken!
+May your fate be decided 
+with a game of rock,paper,scissors divided
+
+Guard: 
+What do we have here
+Is that a little boy i peer
+Why must you test my faith
+with theese hands i will scathe
+Are you ready to meet your doom
+The game of rock,paper,scissors shall be inscribed on your tomb!
