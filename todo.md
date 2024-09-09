@@ -42,12 +42,12 @@
 
 
 cook: 
-Oh challanger take a seat
+Oh, challanger take a seat
 It's time for a change of beat
-For you have stumble in my kitchen
-Where i shall turn you into a chicken!
+Into my kitchen you stumbled
+Let's see how much you have fumbled
 May your fate be decided 
-with a game of rock,paper,scissors divided
+with a game of rock, paper, scissors divided
 
 Guard: 
 What do we have here
