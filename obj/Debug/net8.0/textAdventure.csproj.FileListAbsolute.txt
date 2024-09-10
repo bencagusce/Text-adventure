@@ -1,0 +1,15 @@
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\bin\Debug\net8.0\textAdventure.exe
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\bin\Debug\net8.0\textAdventure.deps.json
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\bin\Debug\net8.0\textAdventure.runtimeconfig.json
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\bin\Debug\net8.0\textAdventure.dll
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\bin\Debug\net8.0\textAdventure.pdb
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.GeneratedMSBuildEditorConfig.editorconfig
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.AssemblyInfoInputs.cache
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.AssemblyInfo.cs
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.csproj.CoreCompileInputs.cache
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.sourcelink.json
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.dll
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\refint\textAdventure.dll
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.pdb
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\textAdventure.genruntimeconfig.cache
+\\StudentNAS1\StudentHome\2024\a24gusce\Desktop\skola\TextAdventure\Text-adventure2\textAdventure\obj\Debug\net8.0\ref\textAdventure.dll
