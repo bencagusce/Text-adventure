@@ -50,77 +50,49 @@ namespace TextAdventure
                 }
             }
             return hasItem;
-        }        
+        }   
+
+        /// <summary>
+        /// Adds an item to the player's iventory
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
         bool AddItem(ref inventory, Item item)
-        {
-            // Check if there is space in the inventory
-            // If yes, set the inventory slot to the item
-            // If no, display inventory contents and allow the player to drop an item
-            
-            bool addItem = false;    
+        {   
             foreach (Item i in inventory)
             {
                 if (i == Item.None)
                 {
                     i = item;
                     Console.WriteLine($"you have picked up {itemNames[item]}")
-                    addItem = true;
-                    break;                   
+                    //addItem = true;
+                    return true;                   
                 }      
             }
-            //added som stuff under here. Check if correct
-            //          I
-            //       \  I  /
-            //        \ I /
-            //         \I/
-            //          V        
-            if (!addItem)
+            Console.WriteLine("Your inventory is full :(.\nEnter the number of the item you want to throw out.");
+            foreach (Item i in inventory)
             {
-                Console.WriteLine("Enter the number of the item you want to throw out.");
-                foreach (Item i in inventory)
-                {
-                    Console.WriteLine($"{i}. {itemNames[i]}");  
-                }
-                string selectedSlot = Console.ReadKey();
-                bool success = int.TryParse(selectedSlot, out result)
-                if (result >= 0 && result <= inventory)
-                {
-                    (Item i in inventory) = result
-                    Console.WriteLine($"you replaced ""{i}. {itemNames[i]}");
-                    i = item
-                    Console.WriteLine($"with ""{i}. {itemNames[i]}");
-                    return true;
-                }
-                else
-                {
-                    Console.Clear();    
-                    Console.WriteLine("Please enter a valid number");   
-                    return false;
-                }
-                Console.Clear();
-                Console.WriteLine("Please enter a valid number");
-                return false;
-                
-
-
-                // CONTINUE HERE
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
-                // CONTINUE HERE 
+                Console.WriteLine($"{i}. {itemNames[i]}");  
             }
+            
+
+            int input = -1;
+            while(!int.TryParse(Console.ReadKey(), out input) || input < 0 || input > inventory.Length())
+            {
+                Console.WriteLine("Please enter a valid number");   
+            }
+
+            string textOutput = $"you replaced {itemNames[inventory[result]]}.";
+            inventory[result] = item;
+            Console.WriteLine(textOutput + $"with {i}. {itemNames[i]}");
+            return true;
+      
         }
         bool Combat(ref inventory)
         {
             bool hasAmulet = HasItem(ref inventory, Item.Amulet);
+            
             
             // Combat logic
         }
