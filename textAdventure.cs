@@ -1,3 +1,5 @@
+using TextAdventure;
+
 namespace TextAdventure
 {
     enum Room
@@ -48,33 +50,59 @@ namespace TextAdventure
                 }
             }
             return hasItem;
-        }
-        
-        void AddItem(ref inventory, Item item)
+        }        
+        bool AddItem(ref inventory, Item item)
         {
             // Check if there is space in the inventory
             // If yes, set the inventory slot to the item
             // If no, display inventory contents and allow the player to drop an item
             
-            bool success = false;    
+            bool addItem = false;    
             foreach (Item i in inventory)
             {
                 if (i == Item.None)
                 {
                     i = item;
                     Console.WriteLine($"you have picked up {itemNames[item]}")
-                    success = true;
+                    addItem = true;
                     break;                   
                 }      
             }
-            if (!success)
+            //added som stuff under here. Check if correct
+            //          I
+            //       \  I  /
+            //        \ I /
+            //         \I/
+            //          V        
+            if (!addItem)
             {
                 Console.WriteLine("Enter the number of the item you want to throw out.");
                 foreach (Item i in inventory)
                 {
                     Console.WriteLine($"{i}. {itemNames[i]}");  
                 }
+                string selectedSlot = Console.ReadKey();
+                bool success = int.TryParse(selectedSlot, out result)
+                if (result >= 0 && result <= inventory)
+                {
+                    (Item i in inventory) = result
+                    Console.WriteLine($"you replaced ""{i}. {itemNames[i]}");
+                    i = item
+                    Console.WriteLine($"with ""{i}. {itemNames[i]}");
+                    return true;
+                }
+                else
+                {
+                    Console.Clear();    
+                    Console.WriteLine("Please enter a valid number");   
+                    return false;
+                }
+                Console.Clear();
+                Console.WriteLine("Please enter a valid number");
+                return false;
                 
+
+
                 // CONTINUE HERE
                 // CONTINUE HERE 
                 // CONTINUE HERE 
@@ -90,7 +118,6 @@ namespace TextAdventure
                 // CONTINUE HERE 
             }
         }
-
         bool Combat(ref inventory)
         {
             bool hasAmulet = HasItem(ref inventory, Item.Amulet);
