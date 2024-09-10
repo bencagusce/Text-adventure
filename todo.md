@@ -1,14 +1,14 @@
 # A Name
-- [ ] The player gets to pick a name, and that name is used later
+- [x] The player gets to pick a name, and that name is used later
 
 # Items & Inventory
-- [ ] 4 different items
+- [x] 4 different items
     - map 
     - key
     - mind reading amulet (can challange goose to battleship)
     - goose
 - [ ] The player can find items and choose to pick them up
-- [ ] One item that gives access to some environment otherwise not accessible
+- [x] One item that gives access to some environment otherwise not accessible
 - [ ] One item that influences the players ability to overcome a later challenge
 - [ ] One situation where the item is based on random chance.
 
@@ -21,10 +21,10 @@
     - go forward - Kitchen Kagrl the hungry (rock/paper/scissors fight) win basement key
     - go left - Library (solve riddle) win mind reading amulet
 - [ ] The player has different events happen, and sometimes choices of what to do in each environment
-- [ ] One choice between 2 or more paths (or doors), that lead to different environments
+- [x] One choice between 2 or more paths (or doors), that lead to different environments
 - [ ] One choice between 2 or more items to pick up
 - [ ] One choice between a new item or an item already picked up
-- [ ] One environment where the player needs to have a specific item to enter
+- [x] One environment where the player needs to have a specific item to enter
 
 # A Challenge (for example Combat)
 - [ ] At least one event where the player engages in some kind of challenge against an opponent
