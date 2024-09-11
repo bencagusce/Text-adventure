@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\a24gusce\\.nuget\\packages\\": {}
+    "C:\\Users\\Ruby\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\StudentNAS1\\StudentHome\\2024\\a24gusce\\Desktop\\skola\\TextAdventure\\Text-adventure2\\textAdventure\\textAdventure.csproj",
+      "projectUniqueName": "D:\\repos\\SpelProg1\\Text-adventure\\textAdventure.csproj",
       "projectName": "textAdventure",
-      "projectPath": "\\\\StudentNAS1\\StudentHome\\2024\\a24gusce\\Desktop\\skola\\TextAdventure\\Text-adventure2\\textAdventure\\textAdventure.csproj",
-      "packagesPath": "C:\\Users\\a24gusce\\.nuget\\packages\\",
-      "outputPath": "\\\\StudentNAS1\\StudentHome\\2024\\a24gusce\\Desktop\\skola\\TextAdventure\\Text-adventure2\\textAdventure\\obj\\",
+      "projectPath": "D:\\repos\\SpelProg1\\Text-adventure\\textAdventure.csproj",
+      "packagesPath": "C:\\Users\\Ruby\\.nuget\\packages\\",
+      "outputPath": "D:\\repos\\SpelProg1\\Text-adventure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\a24gusce\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Ruby\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
