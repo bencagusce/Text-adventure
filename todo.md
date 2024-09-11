@@ -7,52 +7,44 @@
     - key
     - mind reading amulet (can challange goose to battleship)
     - goose
-- [ ] The player can find items and choose to pick them up
+- [x] The player can find items and choose to pick them up
 - [x] One item that gives access to some environment otherwise not accessible
-- [ ] One item that influences the players ability to overcome a later challenge
-- [ ] One situation where the item is based on random chance.
+- [x] One item that influences the players ability to overcome a later challenge
+- [x] One situation where the item is based on random chance.
 
 # Environments (or Rooms)
-- [ ] 4 different environments
+- [x] 4 different environments
     - basement (dark room) Find goose and your left sock (required for winning the game)
     - Hallway (start/end)
     - 2nd floor  (sign: <-library,^ Kitchen, chamber ->)
     - go rigth - Gorb the mighty (rock/paper/scissors fight) win map
     - go forward - Kitchen Kagrl the hungry (rock/paper/scissors fight) win basement key
     - go left - Library (solve riddle) win mind reading amulet
-- [ ] The player has different events happen, and sometimes choices of what to do in each environment
+- [x] The player has different events happen, and sometimes choices of what to do in each environment
 - [x] One choice between 2 or more paths (or doors), that lead to different environments
 - [ ] One choice between 2 or more items to pick up
-- [ ] One choice between a new item or an item already picked up
+- [x] One choice between a new item or an item already picked up
 - [x] One environment where the player needs to have a specific item to enter
 
 # A Challenge (for example Combat)
-- [ ] At least one event where the player engages in some kind of challenge against an opponent
-- [ ] At least 2 different possible outcomes (like “win” and “lose”)
-- [ ] Should contain rounds, as many as needed to decide the outcome.
-- [ ] It should be possible for it to take more than one round
-- [ ] Each round the player should get to decide between at least 3 actions
-- [ ] Each round the opponent should perform one out of at least 2 actions at random
-- [ ] The challenge should be affected by the items in the players possession
+- [x] At least one event where the player engages in some kind of challenge against an opponent
+- [x] At least 2 different possible outcomes (like “win” and “lose”)
+- [x] Should contain rounds, as many as needed to decide the outcome.
+- [x] It should be possible for it to take more than one round
+- [x] Each round the player should get to decide between at least 3 actions
+- [x] Each round the opponent should perform one out of at least 2 actions at random
+- [x] The challenge should be affected by the items in the players possession
 
 # At least one of the Bonus Features:
-- [ ] More than 4 different environments
-- [ ] Add a second challenge, reusing functionality from the first one (without copying code)
+- [x] More than 4 different environments
+- [x] Add a second challenge, reusing functionality from the first one (without copying code)
 - [ ] Add multiple opponents to a challenge that all needs to be defeated one after the other, make each opponent different
 
+# TODOBIDOBADOBIDOBADOOO
+- [ ] Fix amulet combat
+- [ ] Fix basement text formatting
+- [ ] Fix inventory management
+- [ ] Remove unncessary code
+- [ ] Implement battleships
 
-cook: 
-Oh, challanger take a seat
-It's time for a change of beat
-Into my kitchen you stumbled
-Let's see how much you have fumbled
-May your fate be decided 
-with a game of rock, paper, scissors divided
 
-Guard: 
-What do we have here
-Is that a little boy i peer
-Why must you test my faith
-with theese hands i will scathe
-Are you ready to meet your doom
-The game of rock,paper,scissors shall be inscribed on your tomb!
