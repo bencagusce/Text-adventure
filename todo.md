@@ -41,10 +41,12 @@
 - [ ] Add multiple opponents to a challenge that all needs to be defeated one after the other, make each opponent different
 
 # TODOBIDOBADOBIDOBADOOO
-- [ ] Fix amulet combat
-- [ ] Fix basement text formatting
-- [ ] Fix inventory management
+- [x] Fix amulet combat
+- [x] Fix basement text formatting
+- [x] Fix inventory management
 - [ ] Remove unncessary code
 - [ ] Implement battleships
-
+- [ ] Väljer mellan att plocka upp amulet eller "A goose's guide to Battleships"
+- [x] Turn away player with dialogue if the player already has the item available in the room
+- [ ] Divide code into several files
 
