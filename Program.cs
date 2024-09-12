@@ -22,6 +22,7 @@ namespace TextAdventure
             int enemyScore = 0;
 
             bool hasAmulet = inventory.HasItem(Item.Amulet);
+            bool hasCash = inventory.HasItem(Item.Cash);
 
             while (playerScore < 3 && enemyScore < 3)
             {
@@ -31,6 +32,7 @@ namespace TextAdventure
                 Console.WriteLine("1. Rock \n2. Paper \n3. Scissors");
                 // If the player has the amulet, they can read the the enemy's mind
                 if (hasAmulet) Console.WriteLine($"4. Use {GlobalVariables.itemNames[(int)Item.Amulet].ToLower()}");
+                else if (hasCash) Console.WriteLine($"4. Use {GlobalVariables.itemNames[(int)Item.Cash].ToLower()}");
                 Console.WriteLine("\npress a number to choose an option...");
 
                 // Enemy choice
@@ -50,18 +52,27 @@ namespace TextAdventure
                     }
                     playerChoice--;
 
-                    if (playerChoice == 3 && hasAmulet)
+                    if (playerChoice == 3)
                     {
-                        if (!hasUsedAmulet)
+                        if (hasAmulet)
                         {
-                            TypeWrite("\nYou use the amulet of mind reading to see the enemy's choice.\n");
-                            TypeWrite($"The enemy didn't chose {alternatives[(enemyChoice + 1 + rng.Next(2)) % 3]}.\n");
-                            Console.WriteLine("\npress a number to choose an option...");
-                            hasUsedAmulet = true;
+                            if (!hasUsedAmulet)
+                            {
+                                TypeWrite("\nYou use the amulet of mind reading to see the enemy's choice.\n");
+                                TypeWrite($"The enemy didn't chose {alternatives[(enemyChoice + 1 + rng.Next(2)) % 3]}.\n");
+                                Console.WriteLine("\npress a number to choose an option...");
+                                hasUsedAmulet = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have already used the amulet.");
+                            }
                         }
-                        else
+                        else if (hasCash)
                         {
-                            Console.WriteLine("You have already used the amulet.");
+                            inventory.HasItem(Item.Cash, true);
+                            TypeWrite("\nYou use the shiny cash to bribe the enemy.\n");
+                            return true;
                         }
                     }
                     else if (playerChoice < 0 || playerChoice > 2)
@@ -126,7 +137,29 @@ namespace TextAdventure
                 return false;
             }
         }
-
+        /// <summary>
+        /// Checks if the player answered the question correctly
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
+        static bool correctAnswer(int question)
+        {
+            int answer = 0;
+            while (!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out answer) || 1 > answer || answer > 3)
+            {
+                Console.WriteLine("\nPlease enter a valid number");
+            }
+            if (answer == question)
+            {
+                TypeWrite("\nVery good, heres one more question: \n");
+                return true;
+            }
+            else
+            {
+                TypeWrite("\nIm dissapointed.\nYou are forced to leave.");
+                return false;
+            }
+        }
         /// <summary>
         /// "Press any key to continue..." functionality
         /// </summary>
@@ -168,25 +201,6 @@ namespace TextAdventure
                 //Thread.Sleep(slowLetters.Contains(text[i]) ? 200 : 20);
             }
         }
-        static bool correctAnswer(int question)
-        {
-            int answer = 0;
-            while (!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out answer) || 1 > answer || answer > 3)
-            {
-                Console.WriteLine("\nPlease enter a valid number");
-            }
-            if (answer == question)
-            {
-                TypeWrite("\nVery good, heres one more question: \n");
-                return true;              
-            }
-            else
-            {
-                TypeWrite("\nIm dissapointed.\nYou are forced to leave.");
-                return false;
-            }
-        }
-
         static void Main()
         {
             WaitForInteraction();
@@ -195,39 +209,6 @@ namespace TextAdventure
                 Room currentRoom = Room.Hallway;
 
                 Inventory inventory = new Inventory();
-
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                //  inventory.AddItem(Item.Key);
-                //  inventory.AddItem(Item.Map);
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
-                // CHEATING
 
                 // -----
                 // INTRO
@@ -320,6 +301,8 @@ namespace TextAdventure
                         case Room.Basement:
                             (int, int) playerPosition = (5, 0);
                             GlobalVariables.ReRollGooseName();
+
+                            // Store important information about the player's inventory in bools to improve performance
                             bool hasMap = inventory.HasItem(Item.Map);
                             bool hasAmulet = inventory.HasItem(Item.Amulet);
                             bool hasSock = inventory.HasItem(Item.Sock);
@@ -329,8 +312,8 @@ namespace TextAdventure
                             TypeWrite("You enter the basement.\nIt is damp and too dark to see anything.\n");
                             WaitForInteraction();
                             Console.Clear();
-                            
-                            while(currentRoom == Room.Basement)
+
+                            while (currentRoom == Room.Basement)
                             {
                                 if (playerPosition == GlobalVariables.sockPosition && !hasSock)
                                 {
@@ -353,7 +336,7 @@ namespace TextAdventure
                                     Console.WriteLine("\npress a number to choose an option...");
 
                                     validAnswer = false;
-                                    while(!validAnswer)
+                                    while (!validAnswer)
                                     {
                                         validAnswer = true;
                                         switch (Console.ReadKey(false).Key)
@@ -387,7 +370,7 @@ namespace TextAdventure
                                     }
                                 }
 
-                                string[] options = {"h1. Go back to the hallway."};
+                                string[] options = { "h1. Go back to the hallway." };
                                 if (playerPosition.Item1 != 0) options = [.. options, $"l{options.Length + 1}. Go left."];
                                 if (playerPosition.Item1 != GlobalVariables.basementSize.Item1 - 1) options = [.. options, $"r{options.Length + 1}. Go right"];
                                 if (playerPosition.Item2 != GlobalVariables.basementSize.Item2 - 1) options = [.. options, $"f{options.Length + 1}. Go forwards"];
@@ -402,14 +385,14 @@ namespace TextAdventure
                                 Console.WriteLine("\npress a number to choose an option...");
 
                                 int input = 0;
-                                while(!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out input) || input < 1 || input > options.Length)
+                                while (!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out input) || input < 1 || input > options.Length)
                                 {
                                     Console.WriteLine("Please enter a valid number");
                                 }
-                                
+
                                 Console.Clear();
 
-                                switch (options[input-1][0])
+                                switch (options[input - 1][0])
                                 {
                                     case 'h':
                                         currentRoom = Room.Hallway;
@@ -500,7 +483,7 @@ namespace TextAdventure
                                     case ConsoleKey.D3:
                                         currentRoom = Room.Kitchen;
                                         break;
-                                        
+
                                     case ConsoleKey.D4:
                                         Console.Clear();
                                         TypeWrite("\nYou go back down to the hallway.\n");
@@ -516,12 +499,69 @@ namespace TextAdventure
                                 }
                             }
                             break;
-
-                        case Room.Chamber:
-                            if(inventory.HasItem(Item.Key))
+                        case Room.Library:
+                            //solve a riddle and get the mind reading amulet
+                            if (inventory.HasItem(Item.Amulet) || inventory.hasRecievedCash)
                             {
                                 Console.Clear();
-                                TypeWrite("You have already recieved your price you silly goose.\n" +                                
+                                TypeWrite("You have already recieved your price you silly goose.\n" +
+                                    "You leave the library.");
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                TypeWrite("you enter the Library\n" +
+                                    "In the library you're surrounded by books and bookshelves as far as you can see. In the middle of the room there's an elderly man surrounded \n" +
+                                    "by towers of books. The wizards voice is deep and rumbles quietly\n"
+                                );
+                                WaitForInteraction();
+                                TypeWrite("Have thee come to seek knowledge, oh sarig young one. Witan is no sin, though ignorance falls heavy on thy mind.\n" +
+                                    "I shall put thy mind to a test. Wisdom always come with knowledge, and knowledge shan't go unnoticed.\n" +
+                                    "Answer my three questions. And i shall gift you a very special *item* in return.\n" +
+                                    "Question one: what is the tastiest icecream?\n" +
+                                    "1. Chocolat icecream\n" +
+                                    "2. Vanilla icecream\n" +
+                                    "3. Sock-cream icecream\n");
+                                if (correctAnswer(2))
+                                {
+                                    TypeWrite("Question 2: What is the best fruit?\n" +
+                                    "1. pineapple\n" +
+                                    "2. kiwi \n" +
+                                    "3. doritos\n");
+                                    if (correctAnswer(1))
+                                    {
+                                        TypeWrite("Question 3: what is the footwear?\n" +
+                                        "1. socks\n" +
+                                        "2. shoes with socks\n" +
+                                        "3. socks with shoes\n");
+                                        if (correctAnswer(3))
+                                        {
+                                            TypeWrite("You have answered 3 questions and 3 you got right.\n" +
+                                                "Please select a price from my fine treasures.\n" +
+                                                $"1. {GlobalVariables.itemNames[(int)Item.Amulet]}\n" +
+                                                $"2. {GlobalVariables.itemNames[(int)Item.Cash]}\n"
+                                            );
+                                            int answer = 0;
+                                            while (!int.TryParse(Console.ReadKey().KeyChar.ToString(), out answer) || answer < 1 || answer > 3)
+                                            {
+                                                Console.WriteLine("Please enter a valid number");
+                                            }
+                                            if (answer == 1) inventory.AddItem(Item.Amulet);
+                                            else inventory.AddItem(Item.Cash);
+                                            TypeWrite("Now skedadle!\nYou leave the library");
+                                        }
+                                    }
+                                }
+                            }
+                            WaitForInteraction();
+                            currentRoom = Room.UpperFloor;
+                            break;
+                        case Room.Chamber:
+                            //battle with rock/paper/scissors to get the Basement key
+                            if (inventory.HasItem(Item.Key))
+                            {
+                                Console.Clear();
+                                TypeWrite("You have already recieved your price you silly goose.\n" +
                                     "You leave the chamber.");
                             }
                             else
@@ -542,7 +582,7 @@ namespace TextAdventure
                                 );
                                 WaitForInteraction();
                                 if (Combat(inventory))
-                                {                                           
+                                {
                                     TypeWrite("Gorb the palladin of socks hands you a small key. The key smells of old, damp socks.\n" +
                                     "If you want to find your sock you must search the darkest corners of the manor, where no light may reach\n");
                                     inventory.AddItem(Item.Key);
@@ -555,65 +595,15 @@ namespace TextAdventure
                             WaitForInteraction();
                             currentRoom = Room.UpperFloor;
                             break;
-
-                        case Room.Library:
-                            //solve a riddle and get the mind reading amulet
-                            if(inventory.HasItem(Item.Amulet))
-                            {
-                                Console.Clear();
-                                TypeWrite("You have already recieved your price you silly goose.\n" +                                
-                                    "You leave the library.");
-                            }
-                            else
-                            {
-                                Console.Clear();
-                                TypeWrite("you enter the Library\n" +
-                                    "In the library you're surrounded by books and bookshelves as far as you can see. In the middle of the room there's an elderly man surrounded \n" +
-                                    "by towers of books. The wizards voice is deep and rumbles quietly\n"
-                                );
-                                WaitForInteraction();
-                                TypeWrite("Have thee come to seek knowledge, oh sarig young one. Witan is no sin, though ignorance falls heavy on thy mind.\n" +
-                                    "I shall put thy mind to a test. Wisdom always come with knowledge, and knowledge shan't go unnoticed.\n" +
-                                    "Answer my three questions. And i shall gift you a very special *item* in return.\n" +
-                                    "Question one: what is the tastiest icecream?\n" +
-                                    "1. Chocolat icecream\n" +
-                                    "2. Vanilla icecream\n" +
-                                    "3. Sock-cream icecream\n");                                    
-                                if (correctAnswer(2))
-                                {
-                                    TypeWrite("Question 2: What is the best fruit?\n" +
-                                    "1. pineapple\n" +
-                                    "2. kiwi \n" +
-                                    "3. doritos\n");
-                                    if (correctAnswer(1))
-                                    {
-                                        TypeWrite("Question 3: what is the footwear?\n" +
-                                        "1. socks\n" +
-                                        "2. shoes with socks\n" +
-                                        "3. socks with shoes\n");   
-                                        if (correctAnswer(3)) 
-                                        {
-                                            TypeWrite("You have answered 3 questions and 3 you got right.\n"+
-                                            "Here is my gift to you, oh wise one.\n");
-                                            inventory.AddItem(Item.Amulet);
-                                            TypeWrite("Now skedadle!\n" +
-                                            "You leave the library");                                                
-                                        }                                            
-                                    }
-                                } 
-                            }
-                            WaitForInteraction();
-                            currentRoom = Room.UpperFloor;
-                            break;
-
                         case Room.Kitchen:
-                            if(inventory.HasItem(Item.Map))
+                            //battle with rock/paper/scissors to get the Map for the basement.
+                            if (inventory.HasItem(Item.Map))
                             {
                                 Console.Clear();
-                                TypeWrite("You have already recieved your price you silly goose.\n" +                                
+                                TypeWrite("You have already recieved your price you silly goose.\n" +
                                     "You leave the kitchen.");
                             }
-                            else 
+                            else
                             {
                                 Console.Clear();
                                 TypeWrite("You enter the Kitchen\n" +
@@ -642,12 +632,11 @@ namespace TextAdventure
                                 else
                                 {
                                     TypeWrite("You have lost the game and are thrown out of the room\n");
-                                }                                
+                                }
                             }
                             WaitForInteraction();
                             currentRoom = Room.UpperFloor;
                             break;
-
                     }
                 }
 

@@ -22,7 +22,7 @@
     - go left - Library (solve riddle) win mind reading amulet
 - [x] The player has different events happen, and sometimes choices of what to do in each environment
 - [x] One choice between 2 or more paths (or doors), that lead to different environments
-- [ ] One choice between 2 or more items to pick up
+- [x] One choice between 2 or more items to pick up
 - [x] One choice between a new item or an item already picked up
 - [x] One environment where the player needs to have a specific item to enter
 
@@ -45,8 +45,8 @@
 - [x] Fix basement text formatting
 - [x] Fix inventory management
 - [ ] Remove unncessary code
-- [ ] Implement battleships
-- [ ] Väljer mellan att plocka upp amulet eller "A goose's guide to Battleships"
 - [x] Turn away player with dialogue if the player already has the item available in the room
-- [ ] Divide code into several files
+- [x] Divide code into several files
+- [ ] Commenting
+- [ ] Ask Cecilia about crediting for goose names
 

@@ -4,40 +4,43 @@ namespace TextAdventure
     {
         Item[] contents = { Item.None, Item.None, Item.None };
 
+        public bool hasRecievedCash { get; private set; } = false;
+
         /// <summary>
-        /// Checks if the player has a specific item in their inventory
+        /// Checks if the player has a specific item in their inventory. If removeCash is true, cash will be removed from the inventory
         /// </summary>
-        /// <param name="inventory"></param>
         /// <param name="item"></param>
+        /// <param name="removeCash"></param>
         /// <returns></returns>
-        public bool HasItem(Item item)
+        public bool HasItem(Item item, bool removeCash = false)
         {
-            bool hasItem = false;
-            foreach (Item i in contents)
+            for (int i = 0; i < contents.Length; i++)
             {
-                if (i == item)
+                if (contents[i] == item)
                 {
-                    hasItem = true;
+                    if (contents[i] == Item.Cash && removeCash) contents[i] = Item.None;
+                    return true;
                 }
             }
-            return hasItem;
+            return false;
         }
 
         /// <summary>
         /// Adds an item to the player's iventory
         /// </summary>
-        /// <param name=""></param>
-        /// <param name="item"></param>
+        /// <param name="addedItem"></param>
         /// <returns></returns>
-        public bool AddItem(Item addedItem)
+        public void AddItem(Item addedItem)
         {
+            if (addedItem == Item.Cash) hasRecievedCash = true;
+
             for (int i = 0; i < contents.Length; i++)
             {
                 if (contents[i] == Item.None)
                 {
                     contents[i] = addedItem;
                     Program.TypeWrite($"\nYou have picked up *{GlobalVariables.itemNames[(int)addedItem]}*!\n");
-                    return true;
+                    return;
                 }
             }
 
@@ -56,7 +59,7 @@ namespace TextAdventure
             string textOutput = $"\nYou replaced {GlobalVariables.itemNames[(int)contents[input]]} ";
             contents[input] = addedItem;
             Console.WriteLine(textOutput + $"with {GlobalVariables.itemNames[(int)addedItem]}");
-            return true;
+            return;
 
         }
     }

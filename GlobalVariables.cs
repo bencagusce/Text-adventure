@@ -17,6 +17,7 @@ namespace TextAdventure
         Map,
         Key,
         Amulet,
+        Cash,
         Sock,
         Goose
     }
@@ -33,6 +34,7 @@ namespace TextAdventure
             "Basement map",
             "Basement key",
             "Amulet of mind reading",
+            "Shiny cash",
             "Lucky sock",
             $"{gooseNames[rng.Next(gooseNames.Length)]} {gooseNames[rng.Next(gooseNames.Length)]} {gooseSuccession[rng.Next(gooseSuccession.Length)]}, the {gooseTitle[rng.Next(gooseTitle.Length)]} of {gooseSubjects[rng.Next(gooseSubjects.Length)]}"
         };
