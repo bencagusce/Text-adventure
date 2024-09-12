@@ -280,7 +280,7 @@ namespace TextAdventure
                                             if (inventory.HasItem(Item.Sock))
                                             {
                                                 Console.Clear();
-                                                TypeWrite("You leave the manor with your lucky sock");
+                                                TypeWrite("You leave the manor with your *lucky sock*");
                                                 if (inventory.HasItem(Item.Goose) && inventory.HasItem(Item.Cash)) TypeWrite($", *{GlobalVariables.itemNames[(int)Item.Goose]}* and some *shiny cash*.\n");
                                                 else if (inventory.HasItem(Item.Goose)) TypeWrite($" and *{GlobalVariables.itemNames[(int)Item.Goose]}*.\n");
                                                 else if (inventory.HasItem(Item.Cash)) TypeWrite(" and some *shiny cash*.\n");
@@ -604,7 +604,7 @@ namespace TextAdventure
                                 WaitForInteraction();
                                 if (Combat(inventory))
                                 {
-                                    TypeWrite("Gorb the palladin of socks hands you a small key. The key smells of old, damp socks.\n" +
+                                    TypeWrite("*Gorb the palladin of socks* hands you a small key. The key smells of old, damp socks.\n" +
                                     "If you want to find your sock you must search the darkest corners of the manor, where no light may reach\n");
                                     inventory.AddItem(Item.Key);
                                 }
