@@ -10,74 +10,18 @@ namespace TextAdventure
         static Random rng = new Random();
 
         /// <summary>
-        /// Checks if the player has a specific item in their inventory
-        /// </summary>
-        /// <param name="inventory"></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        static bool HasItem(ref Item[] inventory, Item item)
-        {
-            bool hasItem = false;
-            foreach (Item i in inventory)
-            {
-                if (i == item)
-                {
-                    hasItem = true;
-                }
-            }
-            return hasItem;
-        }
-
-        /// <summary>
-        /// Adds an item to the player's iventory
-        /// </summary>
-        /// <param name=""></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        static bool AddItem(ref Item[] inventory, Item addedItem)
-        {
-            for (int i = 0; i < inventory.Length; i++)
-            {
-                if (inventory[i] == Item.None)
-                {
-                    inventory[i] = addedItem;
-                    TypeWrite($"\nYou have picked up *{GlobalVariables.itemNames[(int)addedItem]}*!\n");
-                    return true;
-                }
-            }
-
-            Console.WriteLine("Your inventory is full :(.\nEnter the number of the item you want to throw out.");
-            for (int i = 0; i < inventory.Length; i++)
-            {
-                Console.WriteLine($"{i+1}. {GlobalVariables.itemNames[(int)inventory[i]]}");
-            }            
-            int input = -1;
-            while (!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out input) || input < 0 || input > inventory.Length)
-            {
-                Console.WriteLine("Please enter a valid number");
-            }
-            input --;
-
-            string textOutput = $"\nYou replaced {GlobalVariables.itemNames[(int)inventory[input]]} ";
-            inventory[input] = addedItem;
-            Console.WriteLine(textOutput + $"with {GlobalVariables.itemNames[(int)addedItem]}");
-            return true;
-
-        }
-
-        /// <summary>
         /// Rock, Paper, Scissors combat
         /// </summary>
         /// <param name="inventory"></param>
         /// <returns></returns>
-        static bool Combat(ref Item[] inventory)
+        static bool Combat(ref Inventory inventory)
         {
             string[] alternatives = { "Rock", "Paper", "Scissors" };
 
             int playerScore = 0;
             int enemyScore = 0;
 
-            bool hasAmulet = HasItem(ref inventory, Item.Amulet);
+            bool hasAmulet = inventory.HasItem(Item.Amulet);
 
             while (playerScore < 3 && enemyScore < 3)
             {
@@ -186,7 +130,7 @@ namespace TextAdventure
         /// <summary>
         /// "Press any key to continue..." functionality
         /// </summary>
-        static void WaitForInteraction()
+        public static void WaitForInteraction()
         {
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey(false);
@@ -196,7 +140,7 @@ namespace TextAdventure
         /// Prints text letter by letter for dramatic effect
         /// </summary>
         /// <param name="text">The text to be printed</param>        
-        static void TypeWrite(string text)
+        public static void TypeWrite(string text)
         {
             ConsoleColor defaultConsoleColor = ConsoleColor.Gray;
 
@@ -250,7 +194,7 @@ namespace TextAdventure
             {
                 Room currentRoom = Room.Hallway;
 
-                Item[] inventory = { Item.None, Item.None, Item.None };
+                Inventory inventory = new Inventory();
 
                 // CHEATING
                 // CHEATING
@@ -272,8 +216,8 @@ namespace TextAdventure
                 // CHEATING
                 // CHEATING
                 // CHEATING
-                //  AddItem(ref inventory, Item.Key);
-                //  AddItem(ref inventory, Item.Map);
+                //  inventory.AddItem(Item.Key);
+                //  inventory.AddItem(Item.Map);
                 // CHEATING
                 // CHEATING
                 // CHEATING
@@ -322,7 +266,7 @@ namespace TextAdventure
                                 {
                                     case ConsoleKey.D1:
                                         {
-                                            if (HasItem(ref inventory, Item.Key))
+                                            if (inventory.HasItem(Item.Key))
                                             {
                                                 Console.Clear();
                                                 TypeWrite("You use your key to open the door and enter.\n");
@@ -347,7 +291,7 @@ namespace TextAdventure
                                         }
                                     case ConsoleKey.D3:
                                         {
-                                            if (HasItem(ref inventory, Item.Sock))
+                                            if (inventory.HasItem(Item.Sock))
                                             {
                                                 Console.Clear();
                                                 TypeWrite("You leave the manor with your lucky sock.\n");
@@ -376,10 +320,10 @@ namespace TextAdventure
                         case Room.Basement:
                             (int, int) playerPosition = (5, 0);
                             GlobalVariables.ReRollGooseName();
-                            bool hasMap = HasItem(ref inventory, Item.Map);
-                            bool hasAmulet = HasItem(ref inventory, Item.Amulet);
-                            bool hasSock = HasItem(ref inventory, Item.Sock);
-                            bool hasGoose = HasItem(ref inventory, Item.Goose);
+                            bool hasMap = inventory.HasItem(Item.Map);
+                            bool hasAmulet = inventory.HasItem(Item.Amulet);
+                            bool hasSock = inventory.HasItem(Item.Sock);
+                            bool hasGoose = inventory.HasItem(Item.Goose);
 
                             Console.Clear();
                             TypeWrite("You enter the basement.\nIt is damp and too dark to see anything.\n");
@@ -391,11 +335,11 @@ namespace TextAdventure
                                 if (playerPosition == GlobalVariables.sockPosition && !hasSock)
                                 {
                                     TypeWrite("You found your lucky sock!\n");
-                                    AddItem(ref inventory, Item.Sock);
+                                    inventory.AddItem(Item.Sock);
                                     hasSock = true;
-                                    hasMap = HasItem(ref inventory, Item.Map);
-                                    hasAmulet = HasItem(ref inventory, Item.Amulet);
-                                    hasGoose = HasItem(ref inventory, Item.Goose);
+                                    hasMap = inventory.HasItem(Item.Map);
+                                    hasAmulet = inventory.HasItem(Item.Amulet);
+                                    hasGoose = inventory.HasItem(Item.Goose);
                                     WaitForInteraction();
                                     Console.Clear();
                                 }
@@ -415,11 +359,11 @@ namespace TextAdventure
                                         switch (Console.ReadKey(false).Key)
                                         {
                                             case ConsoleKey.D1:
-                                                AddItem(ref inventory, Item.Goose);
+                                                inventory.AddItem(Item.Goose);
                                                 hasGoose = true;
-                                                hasMap = HasItem(ref inventory, Item.Map);
-                                                hasAmulet = HasItem(ref inventory, Item.Amulet);
-                                                hasSock = HasItem(ref inventory, Item.Sock);
+                                                hasMap = inventory.HasItem(Item.Map);
+                                                hasAmulet = inventory.HasItem(Item.Amulet);
+                                                hasSock = inventory.HasItem(Item.Sock);
                                                 break;
                                             case ConsoleKey.D2:
                                                 TypeWrite($"\nYou leave {GlobalVariables.itemNames[(int)Item.Goose]} alone.\n");
@@ -574,7 +518,7 @@ namespace TextAdventure
                             break;
 
                         case Room.Chamber:
-                            if(HasItem(ref inventory, Item.Key))
+                            if(inventory.HasItem(Item.Key))
                             {
                                 Console.Clear();
                                 TypeWrite("You have already recieved your price you silly goose.\n" +                                
@@ -601,7 +545,7 @@ namespace TextAdventure
                                 {                                           
                                     TypeWrite("Gorb the palladin of socks hands you a small key. The key smells of old, damp socks.\n" +
                                     "If you want to find your sock you must search the darkest corners of the manor, where no light may reach\n");
-                                    AddItem(ref inventory, Item.Key);
+                                    inventory.AddItem(Item.Key);
                                 }
                                 else
                                 {
@@ -614,7 +558,7 @@ namespace TextAdventure
 
                         case Room.Library:
                             //solve a riddle and get the mind reading amulet
-                            if(HasItem(ref inventory, Item.Amulet))
+                            if(inventory.HasItem(Item.Amulet))
                             {
                                 Console.Clear();
                                 TypeWrite("You have already recieved your price you silly goose.\n" +                                
@@ -651,7 +595,7 @@ namespace TextAdventure
                                         {
                                             TypeWrite("You have answered 3 questions and 3 you got right.\n"+
                                             "Here is my gift to you, oh wise one.\n");
-                                            AddItem(ref inventory, Item.Amulet);
+                                            inventory.AddItem(Item.Amulet);
                                             TypeWrite("Now skedadle!\n" +
                                             "You leave the library");                                                
                                         }                                            
@@ -663,7 +607,7 @@ namespace TextAdventure
                             break;
 
                         case Room.Kitchen:
-                            if(HasItem(ref inventory, Item.Map))
+                            if(inventory.HasItem(Item.Map))
                             {
                                 Console.Clear();
                                 TypeWrite("You have already recieved your price you silly goose.\n" +                                
@@ -692,7 +636,7 @@ namespace TextAdventure
                                     TypeWrite("The chef eyes you up and down, smirks and says:\n" +
                                     "Well arent you a spicy little fellow. I have something for you, i used this back in my adventure days.\n" +
                                     "It shows you the way to what your heart desires, and more!\n");
-                                    AddItem(ref inventory, Item.Map);
+                                    inventory.AddItem(Item.Map);
                                     TypeWrite("You leave the kitchen.\n");
                                 }
                                 else

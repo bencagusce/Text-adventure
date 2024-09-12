@@ -1,6 +1,6 @@
 namespace TextAdventure
 {
-    enum Room
+    public enum Room
     {
         End,
         Hallway,
@@ -11,7 +11,7 @@ namespace TextAdventure
         Kitchen
     }
 
-    enum Item
+    public enum Item
     {
         None,
         Map,
