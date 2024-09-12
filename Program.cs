@@ -14,7 +14,7 @@ namespace TextAdventure
         /// </summary>
         /// <param name="inventory"></param>
         /// <returns></returns>
-        static bool Combat(ref Inventory inventory)
+        static bool Combat(Inventory inventory)
         {
             string[] alternatives = { "Rock", "Paper", "Scissors" };
 
@@ -114,7 +114,7 @@ namespace TextAdventure
                     switch (Console.ReadKey(false).Key)
                     {
                         case ConsoleKey.D1:
-                            return Combat(ref inventory);
+                            return Combat(inventory);
                         case ConsoleKey.D2:
                             return false;
                         default:
@@ -541,7 +541,7 @@ namespace TextAdventure
                                     "The game of rock,paper,scissors shall be inscribed on your tomb\n"
                                 );
                                 WaitForInteraction();
-                                if (Combat(ref inventory))
+                                if (Combat(inventory))
                                 {                                           
                                     TypeWrite("Gorb the palladin of socks hands you a small key. The key smells of old, damp socks.\n" +
                                     "If you want to find your sock you must search the darkest corners of the manor, where no light may reach\n");
@@ -631,7 +631,7 @@ namespace TextAdventure
                                     "with a game of rock, paper, scissors divided\n"
                                 );
                                 WaitForInteraction();
-                                if (Combat(ref inventory))
+                                if (Combat(inventory))
                                 {
                                     TypeWrite("The chef eyes you up and down, smirks and says:\n" +
                                     "Well arent you a spicy little fellow. I have something for you, i used this back in my adventure days.\n" +
