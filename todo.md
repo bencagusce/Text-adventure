@@ -44,9 +44,11 @@
 - [x] Fix amulet combat
 - [x] Fix basement text formatting
 - [x] Fix inventory management
-- [ ] Remove unncessary code
+- [x] Remove unncessary code
 - [x] Turn away player with dialogue if the player already has the item available in the room
 - [x] Divide code into several files
-- [ ] Commenting
+- [x] Change questions
 - [ ] Ask Cecilia about crediting for goose names
+- [x] Commenting
+- [ ] Ask Cecilia about adding more comments
 

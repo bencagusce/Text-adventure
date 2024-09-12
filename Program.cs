@@ -107,7 +107,7 @@ namespace TextAdventure
                 }
                 WaitForInteraction();
             }
-
+            //wins
             if (playerScore == 3)
             {
                 TypeWrite("You are victorious! One step closer to your sock!\n");
@@ -115,6 +115,7 @@ namespace TextAdventure
             }
             else
             {
+                //lost
                 TypeWrite("You Lost.\n1. Retry\n2. Leave the room\n");
                 Console.WriteLine("\npress a number to choose an option...");
 
@@ -138,11 +139,12 @@ namespace TextAdventure
             }
         }
         /// <summary>
-        /// Checks if the player answered the question correctly
+        /// Checks if the player answered the question correctly. If lastQuestion is true the dialogue will be different
         /// </summary>
         /// <param name="question"></param>
+        /// <param name="lastQuestion"></param>
         /// <returns></returns>
-        static bool correctAnswer(int question)
+        static bool correctAnswer(int question, bool lastQuestion = false)
         {
             int answer = 0;
             while (!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out answer) || 1 > answer || answer > 3)
@@ -151,7 +153,8 @@ namespace TextAdventure
             }
             if (answer == question)
             {
-                TypeWrite("\nVery good, heres one more question: \n");
+                if (lastQuestion) TypeWrite("\nYou have answered correctly!\n");
+                else TypeWrite("\nVery good, heres one more question: \n");
                 return true;
             }
             else
@@ -198,12 +201,14 @@ namespace TextAdventure
                 Console.Write(text[i]);
 
                 // Wait a bit before printing the next letter
-                //Thread.Sleep(slowLetters.Contains(text[i]) ? 200 : 20);
+                Thread.Sleep(slowLetters.Contains(text[i]) ? 200 : 20);
             }
         }
         static void Main()
         {
+            // Wait for any errors or warnings to be read before starting the game
             WaitForInteraction();
+            // Allow for the game to be replayed
             do
             {
                 Room currentRoom = Room.Hallway;
@@ -231,7 +236,7 @@ namespace TextAdventure
                     bool validAnswer = false;
                     switch (currentRoom)
                     {
-                        case Room.Hallway:
+                        case Room.Hallway:                            
                             TypeWrite(
                                 "You enter the grand hallway of the manor.\n" +
                                 "1. Go to the basement.\n" +
@@ -275,7 +280,11 @@ namespace TextAdventure
                                             if (inventory.HasItem(Item.Sock))
                                             {
                                                 Console.Clear();
-                                                TypeWrite("You leave the manor with your lucky sock.\n");
+                                                TypeWrite("You leave the manor with your lucky sock");
+                                                if (inventory.HasItem(Item.Goose) && inventory.HasItem(Item.Cash)) TypeWrite($", *{GlobalVariables.itemNames[(int)Item.Goose]}* and some *shiny cash*.\n");
+                                                else if (inventory.HasItem(Item.Goose)) TypeWrite($" and *{GlobalVariables.itemNames[(int)Item.Goose]}*.\n");
+                                                else if (inventory.HasItem(Item.Cash)) TypeWrite(" and some *shiny cash*.\n");
+                                                else TypeWrite(".\n");
                                                 currentRoom = Room.End;
                                                 WaitForInteraction();
                                             }
@@ -299,22 +308,26 @@ namespace TextAdventure
                             break;
 
                         case Room.Basement:
-                            (int, int) playerPosition = (5, 0);
-                            GlobalVariables.ReRollGooseName();
-
                             // Store important information about the player's inventory in bools to improve performance
                             bool hasMap = inventory.HasItem(Item.Map);
                             bool hasAmulet = inventory.HasItem(Item.Amulet);
                             bool hasSock = inventory.HasItem(Item.Sock);
                             bool hasGoose = inventory.HasItem(Item.Goose);
 
+                            (int, int) playerPosition = (5, 0);
+                            
+                            // Change the goose's name if it isn't in the inventory
+                            if (!hasGoose) GlobalVariables.ReRollGooseName();
+
                             Console.Clear();
                             TypeWrite("You enter the basement.\nIt is damp and too dark to see anything.\n");
                             WaitForInteraction();
                             Console.Clear();
 
+                            // Continue exploring the basement until the player leaves
                             while (currentRoom == Room.Basement)
                             {
+                                // If the player is standing on the sock give it to them
                                 if (playerPosition == GlobalVariables.sockPosition && !hasSock)
                                 {
                                     TypeWrite("You found your lucky sock!\n");
@@ -327,12 +340,13 @@ namespace TextAdventure
                                     Console.Clear();
                                 }
 
+                                // If the player is standing on the goose, give them options to interact with it
                                 if (playerPosition == GlobalVariables.goosePosition && !hasGoose)
                                 {
                                     TypeWrite($"You have encountered the goose, *{GlobalVariables.itemNames[(int)Item.Goose]}*!\n");
-                                    Console.WriteLine($"1. Pick up *{GlobalVariables.itemNames[(int)Item.Goose]}*");
-                                    Console.WriteLine($"2. Leave *{GlobalVariables.itemNames[(int)Item.Goose]}* alone");
-                                    if (hasAmulet) Console.WriteLine("3. Use the amulet of mind reading");
+                                    TypeWrite($"1. Pick up *{GlobalVariables.itemNames[(int)Item.Goose]}*\n");
+                                    TypeWrite($"2. Leave *{GlobalVariables.itemNames[(int)Item.Goose]}* alone\n");
+                                    if (hasAmulet) TypeWrite("3. Use the *amulet of mind reading*\n");
                                     Console.WriteLine("\npress a number to choose an option...");
 
                                     validAnswer = false;
@@ -370,6 +384,8 @@ namespace TextAdventure
                                     }
                                 }
 
+                                // Construct a list of options based on the player's position and inventory
+                                // The first letter is used later to determine the player's choice
                                 string[] options = { "h1. Go back to the hallway." };
                                 if (playerPosition.Item1 != 0) options = [.. options, $"l{options.Length + 1}. Go left."];
                                 if (playerPosition.Item1 != GlobalVariables.basementSize.Item1 - 1) options = [.. options, $"r{options.Length + 1}. Go right"];
@@ -377,6 +393,7 @@ namespace TextAdventure
                                 if (playerPosition.Item2 != 0) options = [.. options, $"b{options.Length + 1}. Go backwards"];
                                 if (hasMap) options = [.. options, $"m{options.Length + 1}. Use the map"];
 
+                                // Print the options while ignoring the first letter
                                 foreach (string option in options)
                                 {
                                     Console.WriteLine(option[1..]);
@@ -392,6 +409,7 @@ namespace TextAdventure
 
                                 Console.Clear();
 
+                                // Determine the course of action based on the first character of the chosen option
                                 switch (options[input - 1][0])
                                 {
                                     case 'h':
@@ -416,6 +434,8 @@ namespace TextAdventure
                                         break;
                                     case 'm':
                                         Console.WriteLine("You use the map.");
+                                        
+                                        // Draw the map
                                         for (int y = GlobalVariables.basementSize.Item2; y >= 0; y--)
                                         {
                                             for (int x = 0; x < GlobalVariables.basementSize.Item1; x++)
@@ -510,7 +530,7 @@ namespace TextAdventure
                             else
                             {
                                 Console.Clear();
-                                TypeWrite("you enter the Library\n" +
+                                TypeWrite("You enter the Library\n" +
                                     "In the library you're surrounded by books and bookshelves as far as you can see. In the middle of the room there's an elderly man surrounded \n" +
                                     "by towers of books. The wizards voice is deep and rumbles quietly\n"
                                 );
@@ -518,28 +538,29 @@ namespace TextAdventure
                                 TypeWrite("Have thee come to seek knowledge, oh sarig young one. Witan is no sin, though ignorance falls heavy on thy mind.\n" +
                                     "I shall put thy mind to a test. Wisdom always come with knowledge, and knowledge shan't go unnoticed.\n" +
                                     "Answer my three questions. And i shall gift you a very special *item* in return.\n" +
-                                    "Question one: what is the tastiest icecream?\n" +
-                                    "1. Chocolat icecream\n" +
-                                    "2. Vanilla icecream\n" +
-                                    "3. Sock-cream icecream\n");
-                                if (correctAnswer(2))
+                                    "Question one: what is the worlds fastest animal?\n" +
+                                    "1. Cheetah\n" +
+                                    "2. Horse\n" +
+                                    "3. Peregrine falcon\n");
+                                if (correctAnswer(3))
                                 {
-                                    TypeWrite("Question 2: What is the best fruit?\n" +
-                                    "1. pineapple\n" +
-                                    "2. kiwi \n" +
-                                    "3. doritos\n");
+                                    TypeWrite("Question 2: What is the chemical abreviation for salt?\n" +
+                                    "1. NaCl\n" +
+                                    "2. NaOH \n" +
+                                    "3. HOH\n");
                                     if (correctAnswer(1))
                                     {
-                                        TypeWrite("Question 3: what is the footwear?\n" +
-                                        "1. socks\n" +
-                                        "2. shoes with socks\n" +
-                                        "3. socks with shoes\n");
-                                        if (correctAnswer(3))
+                                        TypeWrite("Question 3: I go out of my house for a walk. I walk one kilometer south, one kilometer east and one kilometer north. Now back at my house I see a bear so I quickly close the door.\n" +
+                                        "What colour was the bear?\n" +
+                                        "1. Black\n" +
+                                        "2. White\n" +
+                                        "3. Brown\n");
+                                        if (correctAnswer(2, true))
                                         {
                                             TypeWrite("You have answered 3 questions and 3 you got right.\n" +
                                                 "Please select a price from my fine treasures.\n" +
-                                                $"1. {GlobalVariables.itemNames[(int)Item.Amulet]}\n" +
-                                                $"2. {GlobalVariables.itemNames[(int)Item.Cash]}\n"
+                                                $"1. *{GlobalVariables.itemNames[(int)Item.Amulet]}*\n" +
+                                                $"2. *{GlobalVariables.itemNames[(int)Item.Cash]}*\n"
                                             );
                                             int answer = 0;
                                             while (!int.TryParse(Console.ReadKey().KeyChar.ToString(), out answer) || answer < 1 || answer > 3)
@@ -578,7 +599,7 @@ namespace TextAdventure
                                     "Why must you test my faith\n" +
                                     "with theese hands i will scathe\n" +
                                     "Are you ready to meet your doom.\n" +
-                                    "The game of rock,paper,scissors shall be inscribed on your tomb\n"
+                                    "The game of rock, paper, scissors shall be inscribed on your tomb\n"
                                 );
                                 WaitForInteraction();
                                 if (Combat(inventory))
@@ -640,6 +661,7 @@ namespace TextAdventure
                     }
                 }
 
+                // Ask the player if they want to play again
                 Console.WriteLine("Do you want to play again? (y/n)");
             } while (Console.ReadKey(false).Key == ConsoleKey.Y);
         }

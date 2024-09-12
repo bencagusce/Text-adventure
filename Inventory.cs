@@ -32,8 +32,10 @@ namespace TextAdventure
         /// <returns></returns>
         public void AddItem(Item addedItem)
         {
+            // If the player has recieved cash, they can't pick up more cash
             if (addedItem == Item.Cash) hasRecievedCash = true;
 
+            // Find an empty slot in the inventory and add the item there
             for (int i = 0; i < contents.Length; i++)
             {
                 if (contents[i] == Item.None)
@@ -44,6 +46,7 @@ namespace TextAdventure
                 }
             }
 
+            // If the inventory is full, ask the player to throw out an item
             Console.WriteLine("Your inventory is full :(.\nEnter the number of the item you want to throw out.");
             for (int i = 0; i < contents.Length; i++)
             {
@@ -56,6 +59,7 @@ namespace TextAdventure
             }
             input --;
 
+            // Replace the item in the inventory with the new item
             string textOutput = $"\nYou replaced {GlobalVariables.itemNames[(int)contents[input]]} ";
             contents[input] = addedItem;
             Console.WriteLine(textOutput + $"with {GlobalVariables.itemNames[(int)addedItem]}");
