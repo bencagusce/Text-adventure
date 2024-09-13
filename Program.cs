@@ -221,7 +221,7 @@ namespace TextAdventure
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                TypeWrite("Welcome to the BencaGusce Text Adventure!\nWhat is the name of our adventurer?\n");
+                TypeWrite("Welcome to the BencaGusce Text Adventure:\nManor of the left socks.\nWhat is the name of our adventurer?\n");
                 string name = Console.ReadLine() ?? "Bob McEwen";
                 TypeWrite(
                     $"This is the story of {name} who lost their left sock in the washing machine.\n" +
