@@ -48,7 +48,7 @@
 - [x] Turn away player with dialogue if the player already has the item available in the room
 - [x] Divide code into several files
 - [x] Change questions
-- [ ] Ask Cecilia about crediting for goose names
+- [x] Ask Cecilia about crediting for goose names
 - [x] Commenting
-- [ ] Ask Cecilia about adding more comments
+- [x] Ask Cecilia about adding more comments
 
