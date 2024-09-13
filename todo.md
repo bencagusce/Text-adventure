@@ -5,8 +5,9 @@
 - [x] 4 different items
     - map 
     - key
-    - mind reading amulet (can challange goose to battleship)
+    - mind reading amulet
     - goose
+    - shiny cash
 - [x] The player can find items and choose to pick them up
 - [x] One item that gives access to some environment otherwise not accessible
 - [x] One item that influences the players ability to overcome a later challenge
