@@ -550,7 +550,8 @@ namespace TextAdventure
                                     "3. HOH\n");
                                     if (correctAnswer(1))
                                     {
-                                        TypeWrite("Question 3: I go out of my house for a walk. I walk one kilometer south, one kilometer east and one kilometer north. Now back at my house I see a bear so I quickly close the door.\n" +
+                                        TypeWrite("Question 3: I go out of my house for a walk. I walk one kilometer south, one kilometer east and one kilometer north.\n" +
+                                        "Now back at my house I see a bear so I quickly close the door.\n" +
                                         "What colour was the bear?\n" +
                                         "1. Black\n" +
                                         "2. White\n" +
