@@ -58,7 +58,7 @@ namespace TextAdventure
                         {
                             if (!hasUsedAmulet)
                             {
-                                TypeWrite("\nYou use the amulet of mind reading to see the enemy's choice.\n");
+                                TypeWrite("\nyou use the amulet of mind reading to see the enemy's choice.\n");
                                 TypeWrite($"The enemy didn't chose {alternatives[(enemyChoice + 1 + rng.Next(2)) % 3]}.\n");
                                 Console.WriteLine("\npress a number to choose an option...");
                                 hasUsedAmulet = true;
@@ -320,7 +320,7 @@ namespace TextAdventure
                             if (!hasGoose) GlobalVariables.ReRollGooseName();
 
                             Console.Clear();
-                            TypeWrite("You enter the basement.\nIt is damp and too dark to see anything.\n");
+                            TypeWrite($"{name} enter the basement.\nIt is damp and too dark to see anything.\n");
                             WaitForInteraction();
                             Console.Clear();
 
@@ -330,7 +330,7 @@ namespace TextAdventure
                                 // If the player is standing on the sock give it to them
                                 if (playerPosition == GlobalVariables.sockPosition && !hasSock)
                                 {
-                                    TypeWrite("You found your lucky sock!\n");
+                                    TypeWrite($"{name} found *lucky sock!*\n");
                                     inventory.AddItem(Item.Sock);
                                     hasSock = true;
                                     hasMap = inventory.HasItem(Item.Map);
@@ -343,7 +343,7 @@ namespace TextAdventure
                                 // If the player is standing on the goose, give them options to interact with it
                                 if (playerPosition == GlobalVariables.goosePosition && !hasGoose)
                                 {
-                                    TypeWrite($"You have encountered the goose, *{GlobalVariables.itemNames[(int)Item.Goose]}*!\n");
+                                    TypeWrite($"{name} have encountered the goose, *{GlobalVariables.itemNames[(int)Item.Goose]}*!\n");
                                     TypeWrite($"1. Pick up *{GlobalVariables.itemNames[(int)Item.Goose]}*\n");
                                     TypeWrite($"2. Leave *{GlobalVariables.itemNames[(int)Item.Goose]}* alone\n");
                                     if (hasAmulet) TypeWrite("3. Use the *amulet of mind reading*\n");
@@ -363,7 +363,7 @@ namespace TextAdventure
                                                 hasSock = inventory.HasItem(Item.Sock);
                                                 break;
                                             case ConsoleKey.D2:
-                                                TypeWrite($"\nYou leave {GlobalVariables.itemNames[(int)Item.Goose]} alone.\n");
+                                                TypeWrite($"\n{name} leave {GlobalVariables.itemNames[(int)Item.Goose]} alone.\n");
                                                 break;
                                             case ConsoleKey.D3:
                                                 if (hasAmulet)
@@ -414,26 +414,26 @@ namespace TextAdventure
                                 {
                                     case 'h':
                                         currentRoom = Room.Hallway;
-                                        Console.WriteLine("You go back to the hallway.");
+                                        Console.WriteLine($"{name} goes back to the hallway.");
                                         break;
                                     case 'l':
                                         playerPosition.Item1--;
-                                        Console.WriteLine("You go left.");
+                                        Console.WriteLine($"{name} goes left.");
                                         break;
                                     case 'r':
                                         playerPosition.Item1++;
-                                        Console.WriteLine("You go right.");
+                                        Console.WriteLine($"{name} goes right.");
                                         break;
                                     case 'b':
                                         playerPosition.Item2--;
-                                        Console.WriteLine("You go backwards.");
+                                        Console.WriteLine($"{name} goes backwards.");
                                         break;
                                     case 'f':
                                         playerPosition.Item2++;
-                                        Console.WriteLine("You go forwards.");
+                                        Console.WriteLine($"{name} goes forwards.");
                                         break;
                                     case 'm':
-                                        Console.WriteLine("You use the map.");
+                                        Console.WriteLine($"{name} used the map.");
                                         
                                         // Draw the map
                                         for (int y = GlobalVariables.basementSize.Item2; y >= 0; y--)
@@ -525,12 +525,12 @@ namespace TextAdventure
                             {
                                 Console.Clear();
                                 TypeWrite("You have already recieved your price you silly goose.\n" +
-                                    "You leave the library.");
+                                    $"{name} leaves the library.");
                             }
                             else
                             {
                                 Console.Clear();
-                                TypeWrite("You enter the Library\n" +
+                                TypeWrite($"{name} enters the Library\n" +
                                     "In the library you're surrounded by books and bookshelves as far as you can see. In the middle of the room there's an elderly man surrounded \n" +
                                     "by towers of books. The wizards voice is deep and rumbles quietly\n"
                                 );
@@ -570,7 +570,7 @@ namespace TextAdventure
                                             }
                                             if (answer == 1) inventory.AddItem(Item.Amulet);
                                             else inventory.AddItem(Item.Cash);
-                                            TypeWrite("Now skedadle!\nYou leave the library");
+                                            TypeWrite($"Now skedadle!\n{name} leave the library");
                                         }
                                     }
                                 }
@@ -588,7 +588,7 @@ namespace TextAdventure
                             }
                             else
                             {
-                                TypeWrite("You enter the Chamber\n" +
+                                TypeWrite($"{name} enter the Chamber\n" +
                                     "The giant room is laced with paintings and expensive decorations of only the most aftersought of socks, but sadly not yours.\n" +
                                     "As you look around you see a giant bed the size of your room standing tall in the middle of the room.\n" +
                                     "\"BANG\"The infamous *Gorb the palladin of socks* stands behind you.\n"
@@ -628,7 +628,7 @@ namespace TextAdventure
                             else
                             {
                                 Console.Clear();
-                                TypeWrite("You enter the Kitchen\n" +
+                                TypeWrite($"{name} enters the Kitchen\n" +
                                     "It reeks of spices and mixtures. If you didn't read the sign it could be misstaken for a lab.\n" +
                                     "Jars filled with extinct species and animal parts you have only heard of in stories. You pick up a saltshaker that says \"Unicorn dust\" on it.\n" +
                                     "As soon as your about to put it back you hear a voice behind you.\n"
@@ -649,7 +649,7 @@ namespace TextAdventure
                                     "Well arent you a spicy little fellow. I have something for you, i used this back in my adventure days.\n" +
                                     "It shows you the way to what your heart desires, and more!\n");
                                     inventory.AddItem(Item.Map);
-                                    TypeWrite("You leave the kitchen.\n");
+                                    TypeWrite($"{name} leave the kitchen.\n");
                                 }
                                 else
                                 {
