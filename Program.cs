@@ -7,7 +7,9 @@ namespace TextAdventure
 {
     class Program
     {
-        static Random rng = new Random();
+        private static Random rng = new Random();
+
+        public static string name { get; private set; } = "Bob McEwen";
 
         /// <summary>
         /// Rock, Paper, Scissors combat
@@ -58,20 +60,20 @@ namespace TextAdventure
                         {
                             if (!hasUsedAmulet)
                             {
-                                TypeWrite("\nyou use the amulet of mind reading to see the enemy's choice.\n");
+                                TypeWrite($"\n{name} uses the amulet of mind reading to see the enemy's choice.\n");
                                 TypeWrite($"The enemy didn't chose {alternatives[(enemyChoice + 1 + rng.Next(2)) % 3]}.\n");
                                 Console.WriteLine("\npress a number to choose an option...");
                                 hasUsedAmulet = true;
                             }
                             else
                             {
-                                Console.WriteLine("You have already used the amulet.");
+                                Console.WriteLine($"{name} has already used the amulet.");
                             }
                         }
                         else if (hasCash)
                         {
                             inventory.HasItem(Item.Cash, true);
-                            TypeWrite("\nYou use the shiny cash to bribe the enemy.\n");
+                            TypeWrite($"\n{name} uses the shiny cash to bribe the enemy.\n");
                             return true;
                         }
                     }
@@ -81,7 +83,7 @@ namespace TextAdventure
                     }
                 }
 
-                Console.Write($"\nYou chose {alternatives[playerChoice]} and they chose {alternatives[enemyChoice]}.");
+                Console.Write($"\n{name} chose {alternatives[playerChoice]} and the enemy chose {alternatives[enemyChoice]}.");
 
                 // Combat result
                 // 0 = tie, 1 = win, 2 = lose
@@ -110,13 +112,13 @@ namespace TextAdventure
             //wins
             if (playerScore == 3)
             {
-                TypeWrite("You are victorious! One step closer to your sock!\n");
+                TypeWrite($"{name} is victorious! One step closer to their sock!\n");
                 return true;
             }
             else
             {
                 //lost
-                TypeWrite("You Lost.\n1. Retry\n2. Leave the room\n");
+                TypeWrite($"{name} Lost.\n1. Retry\n2. Leave the room\n");
                 Console.WriteLine("\npress a number to choose an option...");
 
                 bool validAnswer = false;
@@ -144,7 +146,7 @@ namespace TextAdventure
         /// <param name="question"></param>
         /// <param name="lastQuestion"></param>
         /// <returns></returns>
-        static bool correctAnswer(int question, bool lastQuestion = false)
+        static bool CorrectAnswer(int question, bool lastQuestion = false)
         {
             int answer = 0;
             while (!int.TryParse(Console.ReadKey(false).KeyChar.ToString(), out answer) || 1 > answer || answer > 3)
@@ -159,7 +161,7 @@ namespace TextAdventure
             }
             else
             {
-                TypeWrite("\nIm dissapointed.\nYou are forced to leave.");
+                TypeWrite($"\nIm dissapointed.\n{name} was forced to leave.");
                 return false;
             }
         }
@@ -222,7 +224,7 @@ namespace TextAdventure
                 Console.ForegroundColor = ConsoleColor.Gray;
 
                 TypeWrite("Welcome to the BencaGusce Text Adventure:\nManor of the left socks.\nWhat is the name of our adventurer?\n");
-                string name = Console.ReadLine() ?? "Bob McEwen";
+                name = Console.ReadLine() ?? "Bob McEwen";
                 TypeWrite(
                     $"This is the story of {name} who lost their left sock in the washing machine.\n" +
                     $"This Sock was very important to {name} as it was their favourite lucky left sock.\n" +
@@ -291,7 +293,7 @@ namespace TextAdventure
                                             else
                                             {
                                                 Console.Clear();
-                                                TypeWrite($"It seems {name}'s foot is unwiling to leave without it's sock\n");
+                                                TypeWrite($"It seems {name}'s foot is unwilling to leave without it's sock\n");
                                                 WaitForInteraction();
                                             }
                                             break;
@@ -530,7 +532,7 @@ namespace TextAdventure
                             else
                             {
                                 Console.Clear();
-                                TypeWrite($"{name} enters the Library\n" +
+                                TypeWrite($"{name} enters the Library.\n" +
                                     $"In the library {name} is surrounded by books and bookshelves as far as they can see. In the middle of the room there's an elderly man surrounded \n" +
                                     "by towers of books. The wizards voice is deep and rumbles quietly\n"
                                 );
@@ -542,13 +544,13 @@ namespace TextAdventure
                                     "1. Cheetah\n" +
                                     "2. Horse\n" +
                                     "3. Peregrine falcon\n");
-                                if (correctAnswer(3))
+                                if (CorrectAnswer(3))
                                 {
                                     TypeWrite("Question 2: What is the chemical abreviation for salt?\n" +
                                     "1. NaCl\n" +
                                     "2. NaOH \n" +
                                     "3. HOH\n");
-                                    if (correctAnswer(1))
+                                    if (CorrectAnswer(1))
                                     {
                                         TypeWrite("Question 3: I go out of my house for a walk. I walk one kilometer south, one kilometer east and one kilometer north.\n" +
                                         "Now back at my house I see a bear so I quickly close the door.\n" +
@@ -556,7 +558,7 @@ namespace TextAdventure
                                         "1. Black\n" +
                                         "2. White\n" +
                                         "3. Brown\n");
-                                        if (correctAnswer(2, true))
+                                        if (CorrectAnswer(2, true))
                                         {
                                             TypeWrite("You have answered 3 questions and 3 you got right.\n" +
                                                 "Please select a price from my fine treasures.\n" +
@@ -589,7 +591,7 @@ namespace TextAdventure
                             else
                             {
                                 TypeWrite($"{name} enters the Chamber\n" +
-                                    $"The giant room is laced with paintings and expensive decorations of only the most aftersought of socks, but sadly not {names}.\n" +
+                                    $"The giant room is laced with paintings and expensive decorations of only the most aftersought of socks, but sadly not {name}'s.\n" +
                                     $"As {name} looks around they see a giant bed the size of their room standing tall in the middle of the room.\n" +
                                     "\"BANG\"The infamous *Gorb the palladin of socks* stands behind {name}.\n"
                                 );

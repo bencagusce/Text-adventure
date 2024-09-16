@@ -41,13 +41,13 @@ namespace TextAdventure
                 if (contents[i] == Item.None)
                 {
                     contents[i] = addedItem;
-                    Program.TypeWrite($"\nYou have picked up *{GlobalVariables.itemNames[(int)addedItem]}*!\n");
+                    Program.TypeWrite($"\n{Program.name} has picked up *{GlobalVariables.itemNames[(int)addedItem]}*!\n");
                     return;
                 }
             }
 
             // If the inventory is full, ask the player to throw out an item
-            Console.WriteLine("Your inventory is full :(.\nEnter the number of the item you want to throw out.");
+            Console.WriteLine($"{Program.name}'s inventory is full :(.\nEnter the number of the item to be thrown out.");
             for (int i = 0; i < contents.Length; i++)
             {
                 Console.WriteLine($"{i+1}. {GlobalVariables.itemNames[(int)contents[i]]}");
@@ -60,9 +60,9 @@ namespace TextAdventure
             input --;
 
             // Replace the item in the inventory with the new item
-            string textOutput = $"\nYou replaced {GlobalVariables.itemNames[(int)contents[input]]} ";
+            string textOutput = $"\n{GlobalVariables.itemNames[(int)contents[input]]} was replaced with ";
             contents[input] = addedItem;
-            Console.WriteLine(textOutput + $"with {GlobalVariables.itemNames[(int)addedItem]}");
+            Console.WriteLine(textOutput + $"{GlobalVariables.itemNames[(int)addedItem]}");
             return;
 
         }
