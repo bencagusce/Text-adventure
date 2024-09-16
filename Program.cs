@@ -238,7 +238,7 @@ namespace TextAdventure
                     {
                         case Room.Hallway:                            
                             TypeWrite(
-                                "You enter the grand hallway of the manor.\n" +
+                                $"{name} enters the grand hallway of the manor.\n" +
                                 "1. Go to the basement.\n" +
                                 "2. Go to the upper floor.\n" +
                                 "3. Exit the manor.\n"
@@ -531,7 +531,7 @@ namespace TextAdventure
                             {
                                 Console.Clear();
                                 TypeWrite($"{name} enters the Library\n" +
-                                    "In the library you're surrounded by books and bookshelves as far as you can see. In the middle of the room there's an elderly man surrounded \n" +
+                                    $"In the library {name} is surrounded by books and bookshelves as far as they can see. In the middle of the room there's an elderly man surrounded \n" +
                                     "by towers of books. The wizards voice is deep and rumbles quietly\n"
                                 );
                                 WaitForInteraction();
@@ -584,14 +584,14 @@ namespace TextAdventure
                             {
                                 Console.Clear();
                                 TypeWrite("You have already recieved your price you silly goose.\n" +
-                                    "You leave the chamber.");
+                                    $"{name} leaves the chamber.");
                             }
                             else
                             {
-                                TypeWrite($"{name} enter the Chamber\n" +
-                                    "The giant room is laced with paintings and expensive decorations of only the most aftersought of socks, but sadly not yours.\n" +
-                                    "As you look around you see a giant bed the size of your room standing tall in the middle of the room.\n" +
-                                    "\"BANG\"The infamous *Gorb the palladin of socks* stands behind you.\n"
+                                TypeWrite($"{name} enters the Chamber\n" +
+                                    $"The giant room is laced with paintings and expensive decorations of only the most aftersought of socks, but sadly not {names}.\n" +
+                                    $"As {name} looks around they see a giant bed the size of their room standing tall in the middle of the room.\n" +
+                                    "\"BANG\"The infamous *Gorb the palladin of socks* stands behind {name}.\n"
                                 );
                                 WaitForInteraction();
                                 Console.Clear();
@@ -605,13 +605,13 @@ namespace TextAdventure
                                 WaitForInteraction();
                                 if (Combat(inventory))
                                 {
-                                    TypeWrite("*Gorb the palladin of socks* hands you a small key. The key smells of old, damp socks.\n" +
+                                    TypeWrite($"*Gorb the palladin of socks* hands {name} a small key. The key smells of old, damp socks.\n" +
                                     "If you want to find your sock you must search the darkest corners of the manor, where no light may reach\n");
                                     inventory.AddItem(Item.Key);
                                 }
                                 else
                                 {
-                                    TypeWrite("You have lost the game and are thrown out of the room\n");
+                                    TypeWrite($"{name} has lost the game and is thrown out of the room\n");
                                 }
                             }
                             WaitForInteraction();
@@ -623,15 +623,15 @@ namespace TextAdventure
                             {
                                 Console.Clear();
                                 TypeWrite("You have already recieved your price you silly goose.\n" +
-                                    "You leave the kitchen.");
+                                    $"{name} leaves the kitchen.");
                             }
                             else
                             {
                                 Console.Clear();
                                 TypeWrite($"{name} enters the Kitchen\n" +
-                                    "It reeks of spices and mixtures. If you didn't read the sign it could be misstaken for a lab.\n" +
-                                    "Jars filled with extinct species and animal parts you have only heard of in stories. You pick up a saltshaker that says \"Unicorn dust\" on it.\n" +
-                                    "As soon as your about to put it back you hear a voice behind you.\n"
+                                    $"It reeks of spices and mixtures. If {name} hadn't read the sign it could be misstaken for a lab.\n" +
+                                    $"Jars filled with extinct species and animal parts {name} had only heard of in stories. {name} picks up a saltshaker that says \"Unicorn dust\" on it.\n" +
+                                    "As soon as they're about to put it back they hear a voice behind them.\n"
                                 );
                                 WaitForInteraction();
                                 Console.Clear();
@@ -645,15 +645,15 @@ namespace TextAdventure
                                 WaitForInteraction();
                                 if (Combat(inventory))
                                 {
-                                    TypeWrite("The chef eyes you up and down, smirks and says:\n" +
+                                    TypeWrite($"The chef eyes {name} up and down, smirks and says:\n" +
                                     "Well arent you a spicy little fellow. I have something for you, i used this back in my adventure days.\n" +
                                     "It shows you the way to what your heart desires, and more!\n");
                                     inventory.AddItem(Item.Map);
-                                    TypeWrite($"{name} leave the kitchen.\n");
+                                    TypeWrite($"{name} leaves the kitchen.\n");
                                 }
                                 else
                                 {
-                                    TypeWrite("You have lost the game and are thrown out of the room\n");
+                                    TypeWrite($"{name} has lost the game and is thrown out of the room\n");
                                 }
                             }
                             WaitForInteraction();
