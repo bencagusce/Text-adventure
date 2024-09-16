@@ -255,7 +255,7 @@ namespace TextAdventure
                                             if (inventory.HasItem(Item.Key))
                                             {
                                                 Console.Clear();
-                                                TypeWrite("You use your key to open the door and enter.\n");
+                                                TypeWrite($"{name} uses the *{GlobalVariables.itemNames[(int)Item.Key].ToLower()}* to open the door and enter.\n");
                                                 currentRoom = Room.Basement;
                                                 WaitForInteraction();
                                             }
@@ -270,7 +270,7 @@ namespace TextAdventure
                                     case ConsoleKey.D2:
                                         {
                                             Console.Clear();
-                                            TypeWrite("You go up the stairway to the second floor.\n");
+                                            TypeWrite($"{name} goes up the stairway to the second floor.\n");
                                             currentRoom = Room.UpperFloor;
                                             WaitForInteraction();
                                             break;
@@ -280,7 +280,7 @@ namespace TextAdventure
                                             if (inventory.HasItem(Item.Sock))
                                             {
                                                 Console.Clear();
-                                                TypeWrite("You leave the manor with your *lucky sock*");
+                                                TypeWrite($"{name} leaves the manor with their *lucky sock*");
                                                 if (inventory.HasItem(Item.Goose) && inventory.HasItem(Item.Cash)) TypeWrite($", *{GlobalVariables.itemNames[(int)Item.Goose]}* and some *shiny cash*.\n");
                                                 else if (inventory.HasItem(Item.Goose)) TypeWrite($" and *{GlobalVariables.itemNames[(int)Item.Goose]}*.\n");
                                                 else if (inventory.HasItem(Item.Cash)) TypeWrite(" and some *shiny cash*.\n");
@@ -291,7 +291,7 @@ namespace TextAdventure
                                             else
                                             {
                                                 Console.Clear();
-                                                TypeWrite("It seems your foot is unwiling to leave without it's sock\n");
+                                                TypeWrite($"It seems {name}'s foot is unwiling to leave without it's sock\n");
                                                 WaitForInteraction();
                                             }
                                             break;
@@ -320,7 +320,7 @@ namespace TextAdventure
                             if (!hasGoose) GlobalVariables.ReRollGooseName();
 
                             Console.Clear();
-                            TypeWrite($"{name} enter the basement.\nIt is damp and too dark to see anything.\n");
+                            TypeWrite($"{name} enters the basement.\nIt is damp and too dark to see anything.\n");
                             WaitForInteraction();
                             Console.Clear();
 
@@ -343,7 +343,7 @@ namespace TextAdventure
                                 // If the player is standing on the goose, give them options to interact with it
                                 if (playerPosition == GlobalVariables.goosePosition && !hasGoose)
                                 {
-                                    TypeWrite($"{name} have encountered the goose, *{GlobalVariables.itemNames[(int)Item.Goose]}*!\n");
+                                    TypeWrite($"{name} has encountered the goose, *{GlobalVariables.itemNames[(int)Item.Goose]}*!\n");
                                     TypeWrite($"1. Pick up *{GlobalVariables.itemNames[(int)Item.Goose]}*\n");
                                     TypeWrite($"2. Leave *{GlobalVariables.itemNames[(int)Item.Goose]}* alone\n");
                                     if (hasAmulet) TypeWrite("3. Use the *amulet of mind reading*\n");
@@ -363,7 +363,7 @@ namespace TextAdventure
                                                 hasSock = inventory.HasItem(Item.Sock);
                                                 break;
                                             case ConsoleKey.D2:
-                                                TypeWrite($"\n{name} leave {GlobalVariables.itemNames[(int)Item.Goose]} alone.\n");
+                                                TypeWrite($"\n{name} leaves {GlobalVariables.itemNames[(int)Item.Goose]} alone.\n");
                                                 break;
                                             case ConsoleKey.D3:
                                                 if (hasAmulet)
@@ -470,7 +470,7 @@ namespace TextAdventure
                             break;
                         case Room.UpperFloor:
 
-                            TypeWrite("Before you Hangs a sign with some beatufilly inscirbed letters\n");
+                            TypeWrite($"Before {name} hangs a sign with some beatufilly inscirbed letters\n");
                             Console.WriteLine(
                                 "+---------------------------------+\n" +
                                 "|   <-- Library ▲ Chamber -->     |\n" +
@@ -506,7 +506,7 @@ namespace TextAdventure
 
                                     case ConsoleKey.D4:
                                         Console.Clear();
-                                        TypeWrite("\nYou go back down to the hallway.\n");
+                                        TypeWrite($"\n{name} goes back down to the hallway.\n");
                                         currentRoom = Room.Hallway;
                                         WaitForInteraction();
                                         break;
